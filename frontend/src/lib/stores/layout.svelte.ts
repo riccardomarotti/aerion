@@ -1,5 +1,7 @@
 // Responsive layout store for tiled/narrow windows
-// Three modes: full (>1024px), medium (768-1024px), narrow (<768px)
+// Three modes: full (3 columns), medium (2 columns), narrow (1 column)
+// Modes are selected by viewport width and aspect ratio.
+// Tall viewports switch to fewer columns at wider width thresholds.
 
 export type LayoutMode = 'full' | 'medium' | 'narrow'
 export type ResponsiveView = 'default' | 'viewer' | 'sidebar'
@@ -28,8 +30,9 @@ function updateMode() {
 }
 
 export function initLayout() {
-  narrowMql = window.matchMedia('(max-width: 767px)')
-  mediumMql = window.matchMedia('(max-width: 1024px)')
+  // Upper width bounds let sufficiently wide viewports retain more columns.
+  narrowMql = window.matchMedia('(max-width: 767px), (max-aspect-ratio: 9/16) and (max-width: 1200px)')
+  mediumMql = window.matchMedia('(max-width: 1024px), (max-aspect-ratio: 1/1) and (max-width: 1400px)')
 
   updateMode()
 
