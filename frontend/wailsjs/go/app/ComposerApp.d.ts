@@ -24,6 +24,8 @@ export function GetAllAccountIdentities():Promise<Array<app.AccountIdentityGroup
 
 export function GetComposeMode():Promise<app.ComposeMode>;
 
+export function GetCustomCSS():Promise<string>;
+
 export function GetDarkComposerBody():Promise<boolean>;
 
 export function GetDraft():Promise<smtp.ComposeMessage>;
